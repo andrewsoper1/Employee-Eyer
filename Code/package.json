@@ -12,8 +12,13 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "dotenv": "^16.4.5",
     "inquirer": "^8.2.4",
     "pg": "^8.13.0",
     "ts": "^0.0.0"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.7",
+    "@types/node": "^22.7.8"
   }
 }
