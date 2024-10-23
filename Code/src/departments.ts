@@ -20,7 +20,7 @@ const addDepartment = async  () => {
 
 const getDepartments = async () => {
     const departments = await queryDB('SELECT id,  department_name FROM department');
-    return departments.map(department  => 
+    return departments.map((department: { department_name: any; id: any; })  => 
         ({name: department.department_name, value: department.id}))
 
 };

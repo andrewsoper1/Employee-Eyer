@@ -1,15 +1,12 @@
 import inquirer from 'inquirer';
-import {connectDB, disconnectDB} from './connection.js'
+import { connectDB, disconnectDB } from './connection.js';
 import { viewAllEmployees, addEmployee } from './employees.js';
 import { viewAllDepartments, addDepartment } from './departments.js';
 import { viewAllRoles, addRole } from './roles.js';
-
-
-const questions = async  () => {
+const questions = async () => {
     await connectDB();
-
     while (true) {
-        const {choices} = await inquirer.prompt({
+        const { choices } = await inquirer.prompt({
             type: 'list',
             name: 'choices',
             message: 'Please select an option',
@@ -22,45 +19,33 @@ const questions = async  () => {
                 'Add a Employee',
                 'Exit'
             ]
-        })
+        });
         switch (choices) {
             case 'View all Departments':
-               await viewAllDepartments();
-               break;
-            case  'View all Roles':
+                await viewAllDepartments();
+                break;
+            case 'View all Roles':
                 await viewAllRoles();
                 break;
-            case  'View all Employees':
+            case 'View all Employees':
                 await viewAllEmployees();
                 break;
-            case   'Add a Department':
-                await  addDepartment();
+            case 'Add a Department':
+                await addDepartment();
                 break;
-            case   'Add a Role':
+            case 'Add a Role':
                 await addRole();
-            break;
-            case   'Add a Employee':
+                break;
+            case 'Add a Employee':
                 await addEmployee();
                 break;
-            case   'Exit':
+            case 'Exit':
                 await disconnectDB();
                 return;
-
-
-
-
-
-
+        }
     }
-}
-}
-
-questions().catch(err =>{
+};
+questions().catch(err => {
     console.log(err);
-    disconnectDB()
-})
-
-
-
-
-
+    disconnectDB();
+});

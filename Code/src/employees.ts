@@ -14,13 +14,13 @@ const viewAllEmployees = async () => {
         r.salary AS role_salary, 
         COALESCE(m.first_name || ' ' || m.last_name, 'No Manager') AS manager_name
         FROM
-        employees e
+        employee e
         JOIN
         roles r ON e.role_id = r.id
         JOIN
-        departments d ON r.department_id = d.id
+        department d ON r.department_id = d.id
         LEFT JOIN
-        employees m ON e.manager_id = m.id
+        employee m ON e.manager_id = m.id
         ORDER BY
         e.id;
         
@@ -31,7 +31,7 @@ const viewAllEmployees = async () => {
 
 const getEmployees = async () => {
     const employees = await queryDB(`SELECT id, first_name, last_name FROM  employee`);
-    return employees.map(employee => ({
+    return employees.map((employee: { first_name: any; last_name: any; id: any; }) => ({
         name: `${employee.first_name} ${employee.last_name}`,
         value:  employee.id,
 
@@ -60,7 +60,7 @@ const addEmployee = async () => {
     }
 ])
 
-const role = await getRoles();
+const role = await getRoles(department_id);
 const employees = await getEmployees();
 
 employees.unshift({name: 'None', value: null})

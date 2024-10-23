@@ -33,9 +33,9 @@ console.log(`Role ${title} added successfully `)
 
 }
 
-const getRoles = async () => {
-    const roles = await queryDB('SELECT id, title FROM roles');
-    return roles.map(roles => ({
+const getRoles = async (department_id: number) => {
+    const roles = await queryDB('SELECT id, title FROM roles WHERE department_id = $1', [department_id]);
+    return roles.map((roles: { title: any; id: any; }) => ({
         name: roles.title,
         value: roles.id
     }))
